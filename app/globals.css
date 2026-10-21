@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html { scroll-behavior: smooth; }
+body { background: #fbf8f2; color: #1c1916; }
+::selection { background: #62442f; color: #fbf8f2; }
+
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: #f3ede4; }
+::-webkit-scrollbar-thumb { background: #936a4b; border-radius: 999px; }
+
+@layer components {
+  .paper-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wood-grain {
+    background-color: #62442f;
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,.025) 50%, transparent 50%),
+      repeating-linear-gradient(3deg, transparent 0 6px, rgba(20,12,7,.055) 7px 8px);
+    background-size: 30px 100%, 100% 18px;
+  }
+
+  .focus-ring { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leather focus-visible:ring-offset-2; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-fade-up, .animate-float, .animate-marquee { animation: none !important; }
+}
