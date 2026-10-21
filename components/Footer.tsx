@@ -1,5 +1,6 @@
 import { BrandMark } from "./BrandMark";
 import { Wordmark } from "./Wordmark";
+import { asset } from "@/lib/asset";
 import { brand, nav, dev } from "@/lib/content";
 
 export function Footer() {
@@ -35,7 +36,7 @@ export function Footer() {
           <p className="text-center text-xs text-oat/60 lg:text-left">© {year} {brand.full}</p>
           <a href={dev.url} target="_blank" rel="noopener noreferrer" className="focus-ring group flex min-h-[44px] items-center gap-3 rounded-full border border-ivory/10 px-5 py-2.5 transition-colors hover:border-[#00c2e0]/40">
             <span className="text-[11px] font-medium uppercase tracking-wide2 text-oat/60 group-hover:text-oat">Desarrollado por</span>
-            <img src={dev.logo} alt={dev.name} width={52} height={20} className="h-5 w-auto opacity-80 transition-opacity group-hover:opacity-100" />
+            <img src={asset(dev.logo)} alt={dev.name} width={52} height={20} className="h-5 w-auto opacity-80 transition-opacity group-hover:opacity-100" />
           </a>
         </div>
       </div>

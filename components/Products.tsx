@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ProductVisual } from "./ProductVisual";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { asset } from "@/lib/asset";
 import { brand, products, waLink, type Product } from "@/lib/content";
 
 export function Products() {
@@ -32,7 +33,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="relative aspect-[4/5] overflow-hidden bg-sand">
         {product.image ? (
           <Image
-            src={product.image}
+            src={asset(product.image)}
             alt={product.alt ?? product.name}
             fill
             sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 25vw"

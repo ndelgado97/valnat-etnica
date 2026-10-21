@@ -1,0 +1,70 @@
+# Despliegue de la demo provisional en GitHub Pages.
+# No interviene en la ruta definitiva de Railway: usa el script `build:pages`
+# (GITHUB_PAGES=true), que es el único que activa el export estático.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permisos mínimos para el despliegue oficial de Pages vía artefacto.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un solo despliegue a la vez; no se cancelan los que ya están corriendo.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "20"
+          cache: npm
+
+      # Sin `static_site_generator: next`: el basePath y images.unoptimized ya
+      # están en next.config.mjs, y dejar que la acción los inyecte duplicaría
+      # la configuración.
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build:pages
+        env:
+          NEXT_PUBLIC_SITE_URL: https://ndelgado97.github.io/valnat-etnica
+
+      # Red de seguridad: si Jekyll llegara a procesar el sitio, ignoraría
+      # _next/ y la página saldría sin estilos. public/.nojekyll ya lo cubre.
+      - name: Ensure .nojekyll
+        run: touch out/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+          # Desde v4 la acción excluye los dotfiles; sin esto .nojekyll no viaja.
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

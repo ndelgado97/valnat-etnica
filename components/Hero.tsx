@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { BrandMark } from "./BrandMark";
+import { asset } from "@/lib/asset";
 import { brand, waLink } from "@/lib/content";
 
 export function Hero() {
@@ -64,7 +65,7 @@ export function Hero() {
 
         <div className="relative min-h-[320px] overflow-hidden sm:min-h-[560px] lg:min-h-0">
           <Image
-            src="/products/hero-sombrero.jpg"
+            src={asset("/products/hero-sombrero.jpg")}
             alt="Mujer con sombrero de ala ancha, collar fino y pulsera, en tonos tierra a contraluz"
             fill
             priority

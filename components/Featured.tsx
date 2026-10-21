@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "./Reveal";
+import { asset } from "@/lib/asset";
 import { brand, categories } from "@/lib/content";
 
 export function Featured() {
@@ -10,7 +11,7 @@ export function Featured() {
         <Reveal>
           <div className="relative mx-auto aspect-[4/5] max-w-lg overflow-hidden rounded-[1.5rem] shadow-2xl shadow-black/25">
             <Image
-              src="/products/hero-sombrero.jpg"
+              src={asset("/products/hero-sombrero.jpg")}
               alt="Mujer con sombrero de ala ancha y collar fino, imagen editorial en tonos tierra"
               fill
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 480px"

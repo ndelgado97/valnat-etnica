@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "./Reveal";
 import { BrandMark } from "./BrandMark";
+import { asset } from "@/lib/asset";
 import { brand } from "@/lib/content";
 
 export function BrandStory() {
@@ -20,8 +21,8 @@ export function BrandStory() {
 
         <Reveal delay={130}>
           <div className="relative mx-auto h-[420px] max-w-lg sm:h-[560px] lg:h-[650px]">
-            <div className="absolute left-0 top-0 h-[72%] w-[72%] overflow-hidden rounded-[1.5rem] shadow-soft"><Image src="/products/aros.jpg" alt="Par de aros largos con cristales, sobre una hoja verde" fill sizes="(max-width: 640px) 66vw, (max-width: 1024px) 50vw, 35vw" className="object-cover saturate-[.78]" /></div>
-            <div className="absolute bottom-0 right-0 h-[53%] w-[58%] overflow-hidden rounded-[1.5rem] border-8 border-sand shadow-soft"><Image src="/products/anillos.jpg" alt="Anillo con piedra central y detalles en dos tonos de metal" fill sizes="(max-width: 640px) 54vw, (max-width: 1024px) 40vw, 28vw" className="object-cover saturate-[.78]" style={{ objectPosition: "center 45%" }} /></div>
+            <div className="absolute left-0 top-0 h-[72%] w-[72%] overflow-hidden rounded-[1.5rem] shadow-soft"><Image src={asset("/products/aros.jpg")} alt="Par de aros largos con cristales, sobre una hoja verde" fill sizes="(max-width: 640px) 66vw, (max-width: 1024px) 50vw, 35vw" className="object-cover saturate-[.78]" /></div>
+            <div className="absolute bottom-0 right-0 h-[53%] w-[58%] overflow-hidden rounded-[1.5rem] border-8 border-sand shadow-soft"><Image src={asset("/products/anillos.jpg")} alt="Anillo con piedra central y detalles en dos tonos de metal" fill sizes="(max-width: 640px) 54vw, (max-width: 1024px) 40vw, 28vw" className="object-cover saturate-[.78]" style={{ objectPosition: "center 45%" }} /></div>
             <div className="wood-grain absolute right-3 top-10 flex h-20 w-20 items-center justify-center rounded-full shadow-soft sm:top-12 sm:h-28 sm:w-28"><BrandMark className="h-10 w-10 text-ivory sm:h-12 sm:w-12" /></div>
           </div>
         </Reveal>
